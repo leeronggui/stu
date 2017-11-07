@@ -66,3 +66,17 @@ def server_delete():
     id = request.form.get('id')
     db.delete('server',id)
     return json.dumps({'code':0,'result':'delete success!'})
+
+@app.route('/serverdetail/')
+@login_request.login_request
+def serverdetail():
+    role = session.get('role')
+    servers = db.list('server',fields_server)
+    if servers:
+        for i in servers:
+            cabinet = db.list('cabinet',fields_cabinet,i['cabinet_id'])
+            if cabinet:
+                i['cabinet_id'] = cabinet['name']
+            else:
+                continue
+    return render_template("/server/serverdetail.html",servers = servers,role = role)

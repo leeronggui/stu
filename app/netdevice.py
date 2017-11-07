@@ -14,7 +14,6 @@ fields_netdevice=app.config.get('FIELDS_NETDEVICE')
 @app.route('/netdevice/')
 @login_request.login_request
 def netdevice():
-    print 'aaa'
     role = session.get('role')
     netdevices = db.list('netdevice',fields_netdevice)
     return render_template("/netdevice/netdevicelist.html",netdevices = netdevices,role = role)
@@ -65,3 +64,10 @@ def netdevice_delete():
     id = request.form.get('id')
     db.delete('netdevice',id)
     return json.dumps({'code':0,'result':'delete success!'})
+
+@app.route('/netdevicedetail/')
+@login_request.login_request
+def netdevicedetail():
+    role = session.get('role')
+    netdevices = db.list('netdevice',fields_netdevice)
+    return render_template("/netdevice/netdevicedetail.html",netdevices = netdevices,role = role)

@@ -1,0 +1,116 @@
+{% extends "/base/base.html" %}
+{% block breadcrumb %}
+机房管理
+{% endblock %}
+
+{% block main %}
+<div class="col-sm-12">
+{% if role == "admin" %}
+<!--<a href="/netdeviceadd/" class='btn btn-sm btn-primary'>添加网络设备</a>-->
+    <p></p>
+{% endif %}
+    {% if netdevices %}
+    {% for netdevice in netdevices %}
+        <p>编号: {{netdevice.id}}</p>
+        <p>机房名:{{netdevice.idc_name}}</p>
+        <p>机柜ID:{{netdevice.cabinet_id}}</p>
+        <p>机柜位置:{{netdevice.location}}</p>
+        <p>设备名称:{{netdevice.name}}</p>
+        <p>设备品牌:{{netdevice.brand}}</p>
+        <p>设备型号:{{netdevice.model}}</p>
+        <p>内存:{{netdevice.memory}}</p>
+        <p>电口数量:{{netdevice.ele_port}}</p>
+        <p>光口数量:{{netdevice.opt_port}}</p>
+        <p>SN编号:{{netdevice.sn_num}}</p>
+        <p>设备角色:{{netdevice.role}}</p>
+        <p>管理IP:{{netdevice.manageIp}}</p>
+        <p>公网地址:{{netdevice.alternateIp}}</p>
+        <p>运维负责人:{{netdevice.adminer}}</p>
+        <p>联系电话:{{netdevice.phone}}</p>
+        <p>备注:{{netdevice.comments}}</p>
+    {% endfor %}
+    {% endif %}
+</div>
+<script>
+$('#editable').DataTable({
+    "bDestroy": true,
+    "language": {
+        "lengthMenu": "每页 _MENU_ 条记录",
+        "zeroRecords": "没有找到记录",
+        "sInfo": "第 _PAGE_ 页 ( 总共 _PAGES_ 页 ),显示第 _START_ 至 _END_ 项(总共 _TOTAL_ 项)",
+        "infoEmpty": "无记录",
+        "infoFiltered": "(从 _MAX_ 条记录过滤)",
+        "sSearch": "搜索:",
+        "oPaginate": {
+        "sFirst": "首页",
+        "sPrevious": "上一页",
+        "sNext": "下一页",
+        "sLast": "末页"
+        }
+    },
+    "order": [[ 0,"asc" ]]
+})
+
+$('#updateForm').Validform({tiptype:3})
+
+$('.update').click(function(){
+    var id=$(this).attr('data-id')
+    var url = "/idc_update_msg/?id="+id
+    $.getJSON(url,function(data){
+	if (data['code'] == 0){
+	    idc = data['result']
+	    $('#id').val(idc['id'])
+	    $('#name').val(idc['name'])
+	    $('#name_cn').val(idc['name_cn'])
+	    $('#address').val(idc['address'])
+	    $('#adminer').val(idc['adminer'])
+	    $('#phone').val(idc['phone'])
+	    $('#num').val(idc['num'])
+	}else{
+	    $('#errmsg').html('fail')
+	}
+    })
+    $('#updateModel').modal('show')
+})
+
+$('.update-sure').click(function(){
+    var msg=$('.Validform_wrong').text()
+    var str=$('#updateForm').serialize()
+    if (!msg){
+	$.post('/idc_update/',str,function(data){
+	    data=JSON.parse(data)
+	    if (data['code'] == 0){
+		swal('Congratulation',data['result'],'success')
+		//location.href='/idclist'
+		$('.confirm').click(function(){
+		    location.href='/idc/'
+		})
+	    }else{
+		swal('Error',data['errmsg'],'error')
+	    }
+	})
+	return false
+    }
+})
+
+$('.del').click(function(){
+    var id=$(this).attr('data-id')
+    $('.del-sure').attr('data-id',id)
+    $('#deleteModel').modal('show')
+
+})
+
+$('.del-sure').click(function(){
+    var id=$(this).attr('data-id')
+    var str="id="+id
+    $.post('/idc_delete/',str,function(data){
+	swal('Congratulation','delete success!','success')
+	//location.href='/idclist'
+	$('.confirm').click(function(){
+	    location.href='/idc/'
+	})
+    })
+})
+
+</script>
+{% endblock %}

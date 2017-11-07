@@ -16,14 +16,14 @@
         <th class="text-center">机柜ID</th>
         <th class="text-center">设备名称</th>
         <th class="text-center">设备品牌</th>
-        <th class="text-center">设备型号</th>
-        <th class="text-center">内存</th>
-        <th class="text-center">SN编号</th>
+        <!--<th class="text-center">设备型号</th>-->
+        <!--<th class="text-center">内存</th>-->
+        <!--<th class="text-center">SN编号</th>-->
         <th class="text-center">设备角色</th>
         <th class="text-center">管理IP</th>
-        <th class="text-center">公网地址</th>
-        <th class="text-center">运维负责人</th>
-        <th class="text-center">联系电话</th>
+        <!--<th class="text-center">公网地址</th>-->
+        <!--<th class="text-center">运维负责人</th>-->
+        <!--<th class="text-center">联系电话</th>-->
         <th class="text-center">操作</th>
     </tr>
 </thead>
@@ -37,16 +37,17 @@
                 <td class="text-center">{{netdevice.name}}</td>
                 <td class="text-center">{{netdevice.brand}}</td>
                 <td class="text-center">{{netdevice.model}}</td>
-                <td class="text-center">{{netdevice.memory}}</td>
-                <td class="text-center">{{netdevice.sn_num}}</td>
+                <!--<td class="text-center">{{netdevice.memory}}</td>-->
+                <!--<td class="text-center">{{netdevice.sn_num}}</td>-->
                 <td class="text-center">{{netdevice.role}}</td>
                 <td class="text-center">{{netdevice.manageIp}}</td>
-                <td class="text-center">{{netdevice.alternateIp}}</td>
-                <td class="text-center">{{netdevice.adminer}}</td>
-                <td class="text-center">{{netdevice.phone}}</td>
+                <!--<td class="text-center">{{netdevice.alternateIp}}</td>-->
+                <!--<td class="text-center">{{netdevice.adminer}}</td>-->
+                <!--<td class="text-center">{{netdevice.phone}}</td>-->
                 <td class="text-center">
                     <button data-id="{{netdevice.id}}" class="btn btn-xs btn-info update">编辑</button>
                     <button data-id="{{netdevice.id}}" class="btn btn-xs btn-danger del ">删除</button>
+                    <button data-id="{{netdevice.id}}" class="btn btn-xs btn-danger detail ">详情</button>
                 </td>
             </td>
          </tr>

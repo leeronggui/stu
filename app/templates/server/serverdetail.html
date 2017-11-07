@@ -1,0 +1,147 @@
+{% extends "/base/base.html" %}
+{% block breadcrumb %}
+服务器管理
+{% endblock %}
+
+{% block main %}
+<div class="col-sm-12">
+{% if role == "admin" %}
+<!--<a href="/serveradd" class='btn btn-sm btn-primary'>添加服务器</a>-->
+    <p></p>
+{% endif %}
+    {% if servers %}
+    {% for server in servers %}
+	    <p>编号: {{server.id}}</p>
+        <p>机房名:{{server.idc_name}}</p>
+        <p>机柜ID:{{server.cabinet_id}}</p>
+        <p>机柜位置:{{server.location}}</p>
+        <p>主机名:{{server.hostname}}</p>
+        <p>操作系统:{{server.os}}</p>
+        <p>机器品牌:{{server.brand}}</p>
+        <p>机器型号:{{server.model}}</p>
+        <p>CPU数量:{{server.cpu_num}}</p>
+		<p>CPU型号:{{server.cpu_model}}</p>
+        <p>内存:{{server.memory}}</p>
+		<p>磁盘信息:{{server.disk_info}}</p>
+        <p>磁盘总量:{{server.total_disk}}</p>
+		<p>网卡数量:{{server.network_num}}</p>
+        <p>网卡型号:{{server.network_model}}</p>
+		<p>内核版本:{{server.sys_kernel_version}}</p>
+        <p>SN编号:{{server.sn_num}}</p>
+        <p>IP地址:{{server.ip_address}}</p>
+        <p>虚拟主机:{{server.isVirtual}}</p>
+        <p>运维负责人:{{server.adminer}}</p>
+        <p>联系电话:{{server.phone}}</p>
+		<p>更新时间:{{server.update_time}}</p>
+		<p>备注:{{server.comments}}</p>
+    {% endfor %}
+    {% endif %}
+</div>
+<script>
+$('#updateForm').Validform({tiptype:3})
+
+$('.update').click(function(){
+    var id=$(this).attr('data-id')
+    var url = "/server_update_msg?id="+id
+    var str = ''
+
+    $.getJSON('/cabinet_msg',function(data){
+	cabinets = data['result']
+	for(var i=0;i<cabinets.length;i++){
+	    str += '<option value="'+cabinets[i]['id']+'">'+cabinets[i]['name']+'</option>'
+	    }
+	$('#cabinet_id').html(str)
+
+	$.getJSON(url,function(data){
+	    if (data['code'] == 0){
+		server = data['result']
+		$('#id').val(server['id'])
+		$('#hostname').val(server['hostname'])
+		$('#lan_ip').val(server['lan_ip'])
+		$('#wan_ip').val(server['wan_ip'])
+//		$("#cabinet_id").val(server['cabinet_id'])
+		$("#cabinet_id option[value='"+server['cabinet_id']+"']").attr('selected',true)
+		$('#op').val(server['op'])
+		$('#phone').val(server['phone'])
+		$('#cabinet_id').multiselect({
+			    placeholder: "请选择",
+			    enableCaseInsensitiveFiltering: true
+			    })
+		$('#cabinet_id').multiselect('refresh')
+	    }else{
+		$('#errmsg').html('fail')
+	    }
+	})
+//	$('#cabinet_id').multiselect({
+//		    placeholder: "请选择",
+//		    enableCaseInsensitiveFiltering: true
+//		    })
+//	$('#cabinet_id').multiselect('refresh')
+    })
+    $('#updateModel').modal('show')
+})
+
+
+$('.update-sure').click(function(){
+    var str=$('#updateForm').serialize()
+    var str1='&cabinet_id='+$('#cabinet_id').val()
+    $.post('/server_update/',str+str1,function(data){
+	data=JSON.parse(data)
+	if (data['code'] == 0){
+	    swal({
+		title:'Congratulation',
+		text:data['result'],
+		type:'success',
+		confirmButtonText:'确定'
+		},function(){
+		    location.href='/server/'
+		})
+	}else{
+	    swal('Error',data['errmsg'],'error')
+	}
+    })
+    return false
+})
+
+$('.del').click(function(){
+    var id=$(this).attr('data-id')
+    $('.del-sure').attr('data-id',id)
+    $('#deleteModel').modal('show')
+
+})
+
+$('.del-sure').click(function(){
+    var id=$(this).attr('data-id')
+    var str="id="+id
+    $.post('/server_delete/',str,function(data){
+	swal({
+	    title:'Congratulation',
+	    text:'delete success!',
+	    type:'success',
+	    confirmButtonText:'确定'
+	    },function(){
+		location.href='/server/'
+	    })
+    })
+})
+
+$('#editable').DataTable({
+    "bDestroy": true,
+    "language": {
+        "lengthMenu": "每页 _MENU_ 条记录",
+        "zeroRecords": "没有找到记录",
+        "sInfo": "第 _PAGE_ 页 ( 总共 _PAGES_ 页 ),显示第 _START_ 至 _END_ 项(总共 _TOTAL_ 项)",
+        "infoEmpty": "无记录",
+        "infoFiltered": "(从 _MAX_ 条记录过滤)",
+        "sSearch": "搜索:",
+        "oPaginate": {
+        "sFirst": "首页",
+        "sPrevious": "上一页",
+        "sNext": "下一页",
+        "sLast": "末页"
+        }
+    },
+    "order": [[ 0,"asc" ]]
+})
+</script>
+{% endblock %}
