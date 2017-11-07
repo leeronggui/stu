@@ -13,6 +13,8 @@ class Table():
     FIELDS_SERVER=['id','hostname','lan_ip','wan_ip','cabinet_id','op','phone']
     FIELDS_CODE=['id','update_date','update_persion','project','message']
     FIELDS_OPS_JOBS=['id','apply_date','apply_type','apply_desc','deal_persion','status','deal_desc','deal_time','apply_persion']
+    FIELDS_NETDEVICE = ['id', 'idc_name', 'cabinet_name', 'netdevice_name', 'brand', 'model', 'memory',
+                       'sn_num', 'role', 'manage_ip', 'alternate_ip', 'adminer', 'phone']
 
 class RemoteHost():
     HOST1=['192.168.1.100',22,'root','123456']

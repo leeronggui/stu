@@ -18,10 +18,12 @@ def cabinet():
     role = session.get('role')
     cabinets = db.list('cabinet',fields_cabinet)
     for i in cabinets:
-	idc = db.list('idc',fields_idc,i['idc_id'])
-	i['idc_id'] = idc['name']
-
-    return render_template("/cabinet/cabinetlist.html",cabinets = cabinets,role = role)
+        idc = db.list('idc',fields_idc,i['idc_id'])
+        if idc:
+            i['idc_id'] = idc['name']
+        else:
+            continue
+    return render_template("/cabinet/cabinetlist.html", cabinets=cabinets, role=role)
 
 @app.route('/cabinet_msg/')
 @login_request.login_request

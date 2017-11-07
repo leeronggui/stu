@@ -17,10 +17,13 @@ fields_server=app.config.get('FIELDS_SERVER')
 def server():
     role = session.get('role')
     servers = db.list('server',fields_server)
-    for i in servers:
-	cabinet = db.list('cabinet',fields_cabinet,i['cabinet_id'])
-	i['cabinet_id'] = cabinet['name']
-
+    if servers:
+        for i in servers:
+            cabinet = db.list('cabinet',fields_cabinet,i['cabinet_id'])
+            if cabinet:
+                i['cabinet_id'] = cabinet['name']
+            else:
+                continue
     return render_template("/server/serverlist.html",servers = servers,role = role)
 
 @app.route("/serveradd/",methods=['GET','POST'])

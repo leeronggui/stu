@@ -31,9 +31,10 @@ def idcadd():
 	return render_template('/idc/idcadd.html',info = session,role = session.get('role'))
     if request.method == 'POST':
 	data = dict((k,v[0]) for k,v in dict(request.form).items())
-	l = []
-
-	for i in db.list('idc',fields_idc):
+	l = [];
+    dblist = db.list('idc', fields_idc)
+    if dblist:
+	for i in dblist:
 	    l.append(i['name'])
 	if not data['name']:
 	    return json.dumps({'code':1,'errmsg':'name can not be null'})
@@ -42,6 +43,10 @@ def idcadd():
 	    db.add('idc',conditions)
 	    return json.dumps({'code':0,'result':'add idc success'})
 	return json.dumps({'code':1,'errmsg':'idc name is exist'})
+    else:
+        conditions = ["%s='%s'" % (k, v) for k, v in data.items()]
+        db.add('idc', conditions)
+        return json.dumps({'code': 0, 'result': 'add idc success'})
 
 @app.route('/idc_update_msg/')
 @login_request.login_request
