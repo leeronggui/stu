@@ -23,22 +23,19 @@
     </tr>
 </thead>
 <tbody>
+    <!--FIELDS_NETDEVICE_SHOW = ['id', 'idc_name', 'cabinet_id', 'netdevice_name', 'manage_ip', 'brand', 'role', 'memory']-->
+
    {% if netdevices %}
    {% for netdevice in netdevices %}
         <tr class="gradeX">
                 <td class="text-center">{{netdevice.id}}</td>
                 <td class="text-center">{{netdevice.idc_name}}</td>
                 <td class="text-center">{{netdevice.cabinet_id}}</td>
-                <td class="text-center">{{netdevice.name}}</td>
+                <td class="text-center">{{netdevice.netdevice_name}}</td>
+                <td class="text-center">{{netdevice.manage_ip}}</td>
                 <td class="text-center">{{netdevice.brand}}</td>
-                <td class="text-center">{{netdevice.model}}</td>
-                <!--<td class="text-center">{{netdevice.memory}}</td>-->
-                <!--<td class="text-center">{{netdevice.sn_num}}</td>-->
                 <td class="text-center">{{netdevice.role}}</td>
-                <td class="text-center">{{netdevice.manageIp}}</td>
-                <!--<td class="text-center">{{netdevice.alternateIp}}</td>-->
-                <!--<td class="text-center">{{netdevice.adminer}}</td>-->
-                <!--<td class="text-center">{{netdevice.phone}}</td>-->
+                <td class="text-center">{{netdevice.memory}}</td>
                 <td class="text-center">
                     <button data-id="{{netdevice.id}}" class="btn btn-xs btn-info update">编辑</button>
                     <button data-id="{{netdevice.id}}" class="btn btn-xs btn-danger del ">删除</button>

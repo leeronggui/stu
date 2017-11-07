@@ -25,15 +25,20 @@
     </tr>
 </thead>
 <tbody>
+
    {% if servers %}
    {% for server in servers %}
         <tr class="gradeX">
-                <td class="text-center">{{server.hostname}}</td>
-                <td class="text-center">{{server.lan_ip}}</td>
-                <td class="text-center">{{server.wan_ip}}</td>
+                <td class="text-center">{{server.id}}</td>
+                <td class="text-center">{{server.idc_name}}</td>
                 <td class="text-center">{{server.cabinet_id}}</td>
-                <td class="text-center">{{server.op}}</td>
-                <td class="text-center">{{server.phone}}</td>
+                <td class="text-center">{{server.hostname}}</td>
+                <td class="text-center">{{server.ip_address}}</td>
+                <td class="text-center">{{server.model}}</td>
+			    <td class="text-center">{{server.cpu_num}}</td>
+			    <td class="text-center">{{server.memory}}</td>
+			    <td class="text-center">{{server.total_disk}}</td>
+			    <td class="text-center">{{server.isVirtual}}</td>
                 <td class="text-center">
                     <button data-id="{{server.id}}" class="btn btn-xs btn-info update">编辑</button>
                     <button data-id="{{server.id}}" class="btn btn-xs btn-danger del ">删除</button>
