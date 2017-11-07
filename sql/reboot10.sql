@@ -170,25 +170,32 @@ CREATE TABLE `server` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `idc_name` varchar(20) NOT NULL,
   `cabinet_id` int(11) NOT NULL,
+  `location` varchar(15) NOT NULL,
   `hostname` varchar(40) NOT NULL,
   `os` varchar(10) NOT NULL,
   `brand` varchar(20) NOT NULL,
   `model` varchar(50) NOT NULL,
-  `cpu` varchar(50) NOT NULL,
+  `cpu_num` int(2) NOT NULL,
+  `cpu_model` varchar(50) NOT NULL,
   `memory` varchar(50) NOT NULL,
-  `disk` varchar(50) NOT NULL,
-  `network_card` varchar(50) NOT NULL,
+  `disk_info` varchar(50) NOT NULL,
+  `total_disk` varchar(50) NOT NULL,
+  `network_num` int(2) NOT NULL,
+  `network_model` varchar(50) NOT NULL,
+  `sys_kernel_version` varchar(20) NOT NULL,
   `sn_num` varchar(50) NOT NULL,
   `ip_address` varchar(20) DEFAULT NULL,
   `isVirtual` boolean,
   `adminer` varchar(20) DEFAULT NULL,
   `phone` varchar(11) DEFAULT NULL,
+  `update_time` datetime DEFAULT NULL,
+  `comments` varchar(200) DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `hostname` (`hostname`),
   KEY `cabinet_id` (`cabinet_id`),
   CONSTRAINT `server_ibfk_1` FOREIGN KEY (`cabinet_id`) REFERENCES `cabinet` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+/*!40101 SET character_set_client = @saved_cs_client */;	
 
 --
 -- Dumping data for table `server`
@@ -256,18 +263,21 @@ DROP TABLE IF EXISTS `netdevice`;
 CREATE TABLE `netdevice` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `idc_name` varchar(20) NOT NULL,
-  `cabinet_name` varchar(10) NOT NULL,
-  `netdevice_name` varchar(20) NOT NULL,
+  `cabinet_id` int(11) NOT NULL,
+  `location` varchar(20) NOT NULL,
+  `netdevice_name` varchar(10) NOT NULL,
   `brand` varchar(20) NOT NULL,
   `model` varchar(50) NOT NULL,
   `memory` varchar(50) NOT NULL,
+  `ele_port` int(3) NOT NULL,
+  `opt_port` int(3) NOT NULL,
   `sn_num` varchar(50) NOT NULL,
   `role` varchar(10) NOT NULL,
   `manage_ip` varchar(20) DEFAULT NULL,
   `alternate_ip` varchar(20) DEFAULT NULL,
   `adminer` varchar(20) DEFAULT NULL,
   `phone` varchar(11) DEFAULT NULL,
+  `comments` varchar(200) DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `netdevice_name` (`netdevice_name`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
