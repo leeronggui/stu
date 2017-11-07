@@ -168,11 +168,20 @@ DROP TABLE IF EXISTS `server`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `server` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `hostname` varchar(20) NOT NULL,
-  `lan_ip` varchar(20) DEFAULT NULL,
-  `wan_ip` varchar(20) DEFAULT NULL,
-  `cabinet_id` int(11) DEFAULT NULL,
-  `op` varchar(20) DEFAULT NULL,
+  `idc_name` varchar(20) NOT NULL,
+  `cabinet_id` int(11) NOT NULL,
+  `hostname` varchar(40) NOT NULL,
+  `os` varchar(10) NOT NULL,
+  `brand` varchar(20) NOT NULL,
+  `model` varchar(50) NOT NULL,
+  `cpu` varchar(50) NOT NULL,
+  `memory` varchar(50) NOT NULL,
+  `disk` varchar(50) NOT NULL,
+  `network_card` varchar(50) NOT NULL,
+  `sn_num` varchar(50) NOT NULL,
+  `ip_address` varchar(20) DEFAULT NULL,
+  `isVirtual` boolean,
+  `adminer` varchar(20) DEFAULT NULL,
   `phone` varchar(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `hostname` (`hostname`),
@@ -185,11 +194,11 @@ CREATE TABLE `server` (
 -- Dumping data for table `server`
 --
 
-LOCK TABLES `server` WRITE;
-/*!40000 ALTER TABLE `server` DISABLE KEYS */;
-INSERT INTO `server` VALUES (7,'server01','192.168.2.100','121.45.56.133',8,'yao','15052234455');
-/*!40000 ALTER TABLE `server` ENABLE KEYS */;
-UNLOCK TABLES;
+-- LOCK TABLES `server` WRITE;
+-- /*!40000 ALTER TABLE `server` DISABLE KEYS */;
+-- INSERT INTO `server` VALUES (7,'server01','192.168.2.100','121.45.56.133',8,'yao','15052234455');
+-- /*!40000 ALTER TABLE `server` ENABLE KEYS */;
+-- UNLOCK TABLES;
 
 --
 -- Table structure for table `users`
