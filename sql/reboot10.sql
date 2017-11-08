@@ -169,8 +169,8 @@ DROP TABLE IF EXISTS `server`;
 CREATE TABLE `server` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `idc_name` varchar(20) NOT NULL,
-  `cabinet_id` int(11) NOT NULL,
-  `location` varchar(15) NOT NULL,
+  `cabinet_id` int(11) DEFAULT NULL,
+  `location` varchar(15) DEFAULT NULL,
   `hostname` varchar(40) NOT NULL,
   `os` varchar(10) NOT NULL,
   `brand` varchar(20) NOT NULL,
