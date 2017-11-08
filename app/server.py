@@ -86,7 +86,7 @@ def serveraddapi():
 
 #根据主机id获取主机详情
 @app.route('/api/v1/serverinfo/')
-@login_request.login_request
+# @login_request.login_request
 def serverinfo():
     id = request.args.get('id')
     server = db.list('server',fields_server,id)
