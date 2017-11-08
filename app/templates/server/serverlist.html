@@ -1,9 +1,9 @@
 {% extends "/base/base.html" %}
-{% block breadcrumb %} 
+{% block breadcrumb %}
 服务器管理
 {% endblock %}
 
-{% block main %} 
+{% block main %}
 <div class="col-sm-12">
 {% if role == "admin" %}
 <p><a href="/serveradd" class='btn btn-sm btn-primary'>添加服务器</a></p>
@@ -129,13 +129,77 @@
 	<p>确认删除?</p>
       </div>
       <div class="modal-footer">
-	<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>                                                                         
+	<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
 	<button type="button" class="btn btn-primary del-sure" data-id=''>确认</button>
       </div>
     </div><!-- /.modal-content -->
   </div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
+<!--col-sm-12-->
+<div class="modal fade" id='detailModel'>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+  <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+  <h4 class="modal-title">详情</h4>
+      </div>
+      <div class="modal-body">
+  <form method="post" id="updateForm" class="form-horizontal">
+      <div>
+    <input id='id' type='hidden' name='id' readonly='true' >
+      </div><!-- id -->
 
+      <div class='form-group'>
+    <label for="hostname" class="col-sm-3 control-label">主机名<span class="red-fonts">*</span></label>
+    <div class="col-sm-7">
+        <input id="hostname" name="hostname" placeholder="Hostname" type="text" class="form-control" readonly>
+    </div>
+      </div>
+      <div class="hr-line-dashed"></div>
+      <div class='form-group'>
+    <label for="lan_ip" class="col-sm-3 control-label">内网IP</label>
+    <div class="col-sm-7">
+        <input id="lan_ip" name="lan_ip" placeholder="Lan ip" type="text" class="form-control" >
+    </div>
+      </div>
+      <div class="hr-line-dashed"></div>
+      <div class='form-group'>
+    <label for="wan_ip" class="col-sm-3 control-label">外网IP</label>
+    <div class="col-sm-7">
+        <input id="wan_ip" name="wan_ip" placeholder="Wan ip" type="text" class="form-control">
+    </div>
+      </div>
+      <div class="hr-line-dashed"></div>
+      <div class='form-group'>
+    <label for="cabinet_id" class="col-sm-3 control-label">机柜ID</label>
+    <div class="col-sm-7">
+        <select id='cabinet_id' class='multiselect dropdown-toggle btn btn-default'>
+        </select>
+    </div>
+      </div>
+      <div class="hr-line-dashed"></div>
+      <div class='form-group'>
+    <label for="op" class="col-sm-3 control-label">运维负责人</label>
+    <div class="col-sm-7">
+        <input id="op" name="op" placeholder="Operator" type="text" class="form-control">
+    </div>
+      </div>
+      <div class="hr-line-dashed"></div>
+      <div class='form-group'>
+    <label for="phone" class="col-sm-3 control-label">联系电话</label>
+    <div class="col-sm-7">
+        <input id="phone" name="phone" placeholder="Phone" type="text" class="form-control">
+    </div>
+      </div>
+  </form>
+      </div>
+      <div class="modal-footer">
+  <button type="button" class="btn btn-default update-cancel" data-dismiss="modal">取消</button>
+  <button type="button" class="btn btn-primary update-sure" data-name=''>确认</button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
 <script>
 $('#updateForm').Validform({tiptype:3})
 
@@ -150,7 +214,7 @@ $('.update').click(function(){
 	    str += '<option value="'+cabinets[i]['id']+'">'+cabinets[i]['name']+'</option>'
 	    }
 	$('#cabinet_id').html(str)
-	
+
 	$.getJSON(url,function(data){
 	    if (data['code'] == 0){
 		server = data['result']
@@ -179,7 +243,10 @@ $('.update').click(function(){
     })
     $('#updateModel').modal('show')
 })
-
+// 详情
+$('.detail').click(function(){
+  $('#detailModel').modal('show')
+})
 
 $('.update-sure').click(function(){
     var str=$('#updateForm').serialize()
@@ -206,7 +273,7 @@ $('.del').click(function(){
     var id=$(this).attr('data-id')
     $('.del-sure').attr('data-id',id)
     $('#deleteModel').modal('show')
-    
+
 })
 
 $('.del-sure').click(function(){
@@ -225,7 +292,7 @@ $('.del-sure').click(function(){
 })
 
 $('#editable').DataTable({
-    "bDestroy": true, 
+    "bDestroy": true,
     "language": {
         "lengthMenu": "每页 _MENU_ 条记录",
         "zeroRecords": "没有找到记录",
