@@ -1,7 +1,7 @@
 #!/usr/bin/python
 #coding:utf-8
 
-from flask import render_template,request,redirect,session
+from flask import render_template,request,redirect,session, Response
 from . import app
 from config import *
 from utils import login_request
@@ -90,11 +90,14 @@ def serveraddapi():
 def serverinfo():
     id = request.args.get('id')
     server = db.list('server',fields_server,id)
-    print server
     if server:
         # print server['update_time']
         # server['update_time'] = server['update_time'].strftime('%Y-%m-%d %H:%M:%S')
-        return json.dumps({"code": "0", "status": "success", "result": server}, cls=json_encoder.JsonEncoder)
+        rt = json.dumps({"code": "0", "status": "success", "result": server}, cls=json_encoder.JsonEncoder)
+        response = Response(rt, mimetype='application/json')
+        response.headers['Access-Control-Allow-Origin'] = '*'
+        # return json.dumps({"code": "0", "status": "success", "result": server}, cls=json_encoder.JsonEncoder)
+        return response
     else: return json.dumps({"code": "1", "status": "failed", "result": "Get server info failed"})
 
 
