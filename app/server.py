@@ -101,6 +101,25 @@ def serverinfo():
     else: return json.dumps({"code": "1", "status": "failed", "result": "Get server info failed"})
 
 
+#根据主机id获取主机详情
+@app.route('/api/v1/serverupdate/<id>',methods=['POST'])
+# @login_request.login_request
+def serverupdate(id):
+    if request.method == 'POST':
+        try:
+            data = request.get_data()
+            postData = json.loads(data)
+        except Exception as e:
+            return json.dumps({"code": "1","status": "failed","result": "Data type must be json."})
+        try:
+            conditions = ["%s='%s'" % (k, v) for k, v in postData.items()]
+            db.update('server', conditions, id)
+            response = Response(json.dumps({"code": "0","status": "success","result": "Update server success."}), mimetype='application/json')
+            response.headers['Access-Control-Allow-Origin'] = '*'
+            return response
+        except Exception as e:
+            return json.dumps({"code": "1","status": "failed","result": "Update server failed."})
+
 @app.route('/server_update_msg/')
 @login_request.login_request
 def server_update_msg():
