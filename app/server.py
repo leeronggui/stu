@@ -5,6 +5,7 @@ from flask import render_template,request,redirect,session
 from . import app
 from config import *
 from utils import login_request
+from utils import json_encoder
 import json
 import db
 
@@ -82,6 +83,19 @@ def serveraddapi():
             return json.dumps({"code": "1", "status": "failed", "result": "First add idc."})
     if request.method == 'GET':
         return json.dumps({"code": "1","status": "failed","result": "Get method not allow."})
+
+#根据主机id获取主机详情
+@app.route('/api/v1/serverinfo/')
+# @login_request.login_request
+def serverinfo():
+    id = request.args.get('id')
+    server = db.list('server',fields_server,id)
+    print server
+    if server:
+        # print server['update_time']
+        # server['update_time'] = server['update_time'].strftime('%Y-%m-%d %H:%M:%S')
+        return json.dumps({"code": "0", "status": "success", "result": server}, cls=json_encoder.JsonEncoder)
+    else: return json.dumps({"code": "1", "status": "failed", "result": "Get server info failed"})
 
 
 @app.route('/server_update_msg/')
