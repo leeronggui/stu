@@ -11,20 +11,25 @@ import db
 app.config.from_object(Table)
 fields_cabinet=app.config.get('FIELDS_CABINET')  
 fields_server=app.config.get('FIELDS_SERVER')
+fields_server_show = app.config.get('FIELDS_SERVER_SHOW')
 fields_idc = app.config.get('FIELDS_IDC')
 
 @app.route('/server/')
 @login_request.login_request
 def server():
     role = session.get('role')
-    servers = db.list('server',fields_server)
+    servers = db.list('server',fields_server_show)
     if servers:
         for i in servers:
-            cabinet = db.list('cabinet',fields_cabinet,i['cabinet_id'])
-            if cabinet:
-                i['cabinet_id'] = cabinet['name']
-            else:
-                continue
+            if i['cabinet_id']:
+                cabinet = db.list('cabinet',fields_cabinet,i['cabinet_id'])
+                if cabinet:
+                    i['cabinet_id'] = cabinet['name']
+                else:
+                    return json.loads(
+                        {"code": "1", "status": "failed", "result": "server: %s not get relatively cabinet."} % (
+                        i['hostname']))
+            else:i['cabinet_id'] = 'Unknown'
     return render_template("/server/serverlist.html",servers = servers,role = role)
 
 @app.route("/serveradd/",methods=['GET','POST'])
@@ -68,7 +73,6 @@ def serveraddapi():
                 if postIdcUp == idcInfo['name'] or postIdcLow in idcInfo['name']:
                     try:
                         conditions = [ "%s='%s'" %  (k,v) for k,v in postData.items()]
-                        print conditions
                         db.add('server', conditions)
                         return json.dumps({"code": "0","status": "success","result": "Add server success!"})
                     except Exception as e:
