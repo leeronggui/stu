@@ -61,9 +61,15 @@
       </div>
       <div class="modal-body">
 	<form method="post" id="updateForm" class="form-horizontal">
-	    <div>
+	    <!-- <div>
 		<input id='id' type='hidden' name='id' readonly='true' >
-	    </div><!-- id -->
+	    </div> --><!-- id -->
+      <div class='form-group'>
+        <label for="id" class="col-sm-3 control-label">编号</label>
+        <div class="col-sm-7">
+            <input id="id" name="id" placeholder="" type="text" class="form-control" readonly>
+        </div>
+      </div>
       <div class='form-group'>
         <label for="idc_name" class="col-sm-3 control-label">机房名</label>
         <div class="col-sm-7">
@@ -90,7 +96,7 @@
 	    <div class='form-group'>
     		<label for="hostname" class="col-sm-3 control-label">主机名<span class="red-fonts">*</span></label>
     		<div class="col-sm-7">
-    		    <input id="hostname" name="hostname" placeholder="Hostname" type="text" class="form-control" readonly>
+    		    <input id="hostname" name="hostname" placeholder="" type="text" class="form-control" readonly>
     		</div>
 	    </div>
       <div class="hr-line-dashed"></div>
@@ -118,7 +124,7 @@
       <div class='form-group'>
         <label for="cpu_num" class="col-sm-3 control-label">CPU数量</label>
         <div class="col-sm-7">
-            <input id="cpu_num" name="cpu_num" placeholder="4" type="text" class="form-control" >
+            <input id="cpu_num" name="cpu_num" placeholder="" type="text" class="form-control" >
         </div>
       </div>
       <div class="hr-line-dashed"></div>
@@ -224,7 +230,7 @@
       <div class='form-group'>
         <label for="comments" class="col-sm-3 control-label">备注</label>
         <div class="col-sm-7">
-            <input id="comments" name="comments" placeholder="" type="text" class="form-control">
+            <textarea name="comments" id="comments" rows="3" class="form-control"></textarea>
         </div>
       </div>
 	</form>
@@ -396,40 +402,44 @@ $('.update').click(function(){
     var str = ''
 
     $.getJSON('/cabinet_msg',function(data){
-	cabinets = data['result']
-	for(var i=0;i<cabinets.length;i++){
-	    str += '<option value="'+cabinets[i]['id']+'">'+cabinets[i]['name']+'</option>'
-	    }
-	$('#cabinet_id').html(str)
+    	cabinets = data['result']
+    	for(var i=0;i<cabinets.length;i++){
+    	    str += '<option value="'+cabinets[i]['id']+'">'+cabinets[i]['name']+'</option>'
+    	    }
+    	$('#cabinet_id').html(str)
 
-	$.getJSON(url,function(data){
-	    if (data['code'] == 0){
-		server = data['result']
-		$('#id').val(server['id'])
-		$('#hostname').val(server['hostname'])
-		$('#lan_ip').val(server['lan_ip'])
-		$('#wan_ip').val(server['wan_ip'])
-//		$("#cabinet_id").val(server['cabinet_id'])
-		$("#cabinet_id option[value='"+server['cabinet_id']+"']").attr('selected',true)
-		$('#op').val(server['op'])
-		$('#phone').val(server['phone'])
-		$('#cabinet_id').multiselect({
-			    placeholder: "请选择",
-			    enableCaseInsensitiveFiltering: true
-			    })
-		$('#cabinet_id').multiselect('refresh')
-	    }else{
-		$('#errmsg').html('fail')
-	    }
-	})
-//	$('#cabinet_id').multiselect({
-//		    placeholder: "请选择",
-//		    enableCaseInsensitiveFiltering: true
-//		    })
-//	$('#cabinet_id').multiselect('refresh')
+    	$.getJSON(url,function(data){
+    	    if (data['code'] == 0){
+        		server = data['result']
+        		$('#id').val(server['id'])
+        		$('#hostname').val(server['hostname'])
+        		$('#lan_ip').val(server['lan_ip'])
+        		$('#wan_ip').val(server['wan_ip'])
+            // $("#cabinet_id").val(server['cabinet_id'])
+        		$("#cabinet_id option[value='"+server['cabinet_id']+"']").attr('selected',true)
+        		$('#op').val(server['op'])
+        		$('#phone').val(server['phone'])
+        		$('#cabinet_id').multiselect({
+        			    placeholder: "请选择",
+        			    enableCaseInsensitiveFiltering: true
+        			    })
+        		$('#cabinet_id').multiselect('refresh')
+    	    }else{
+    		    $('#errmsg').html('fail')
+    	    }
+    	})
+    //	$('#cabinet_id').multiselect({
+    //		    placeholder: "请选择",
+    //		    enableCaseInsensitiveFiltering: true
+    //		    })
+    //	$('#cabinet_id').multiselect('refresh')
     })
     $('#updateModel').modal('show')
 })
+// 编辑
+// $('.update').click(function(){
+//   $('#updateModel').modal('show');
+// })
 // 详情
 $('.detail').click(function(){
   $('#detailModel').modal('show');
