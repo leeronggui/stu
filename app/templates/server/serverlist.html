@@ -490,17 +490,17 @@ $('.update').click(function(){
             data: strJson,
             success: function(data){
               var result_str=JSON.parse(data);
-              if (result_str['code'] == 0){
+              if (result_str["code"] == 0){
                   swal({
                 title:'Congratulation',
-                text:result_str['result'],
+                text:result_str["result"],
                 type:'success',
                 confirmButtonText:'确定'
                 },function(){
                     location.href='/server/'
                 })
               }else{
-                  swal('Error',data['errmsg'],'error')
+                  swal('Error',result_str["errmsg"],'error')
               }
             }
           })
