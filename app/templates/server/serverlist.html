@@ -471,11 +471,7 @@ $('.update').click(function(){
       var result = data.result;
       $("#updateForm #id").val(result.id);
       // 机房
-      // $('#idc_name').multiselect({
-      //       placeholder: "请选择",
-      //       enableCaseInsensitiveFiltering: true
-      //       })
-      // $('#idc_name').multiselect('refresh');
+      $("#idc_name option:contains("+result.idc_name+")").attr("selected",true);
       // 机柜
       $("#updateForm #location").val(result.location);
       $("#updateForm #ip_address").val(result.ip_address);

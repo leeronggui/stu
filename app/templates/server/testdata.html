@@ -6,7 +6,21 @@
   <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
 </head>
 <body>
+<select id="mySelect">
+  <option value="1">Apple</option>
+  <option value="2">Orange</option>
+  <option value="3">Pineapple</option>
+  <option value="4">Banana</option>
+</select>
 <script type="text/javascript">
+$.ajax({
+    method: "GET",
+    url: "http://211.159.165.47:14320/api/v1/serverinfo/?id=8",
+    success: function(data){
+      console.log(data.result);
+    }
+  })
+$("#mySelect option:contains('Banana')").attr("selected",true);
 // var server_id = 8;
   // $.ajax({
   //   method: "POST",
