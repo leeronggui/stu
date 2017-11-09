@@ -20,7 +20,8 @@ $.ajax({
       console.log(data.result);
     }
   })
-$("#mySelect option:contains('Banana')").attr("selected",true);
+var str = "Banana";
+$("#mySelect option:contains('"+str+"')").attr("selected",true);
 // var server_id = 8;
   // $.ajax({
   //   method: "POST",

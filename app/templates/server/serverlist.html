@@ -472,8 +472,8 @@ $('.update').click(function(){
       $("#updateForm #id").val(result.id);
       // 机房
       var idc_select = result.idc_name;
-      console.log(result.idc_name);
-      $("#idc_name option:contains('"+result.idc_name+"')").attr("selected",true);
+      console.log(idc_select.toString());
+      $("#idc_name option:contains('"+idc_select.toString()+"')").attr("selected",true);
       // 机柜
       $("#updateForm #location").val(result.location);
       $("#updateForm #ip_address").val(result.ip_address);
