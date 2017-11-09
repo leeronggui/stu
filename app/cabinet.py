@@ -71,3 +71,11 @@ def cabinet_delete():
     id = request.form.get('id')
     db.delete('cabinet',id)
     return json.dumps({'code':0,'result':'delete success!'})
+
+@app.route('/api/v1/cabinet/cabinetname/<idc_id>', methods=['GET'])
+# @login_request.login_request
+def cabinetname(idc_id):
+    cabinets = db.list('cabinet',['name','idc_id'])
+    # for cabinet in cabinets:
+    #     ifc_name = idc['name']
+    return json.dumps({"code": "0","status": "success","result": cabinets})

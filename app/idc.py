@@ -69,3 +69,11 @@ def idc_delete():
     id = request.form.get('id')
     db.delete('idc',id)
     return json.dumps({'code':0,'result':'delete success!'})
+
+@app.route('/api/v1/idc/idcname')
+# @login_request.login_request
+def idcname():
+    idcs = db.list('idc',['id','name'])
+    # for idc in idcs:
+    #     ifc_name = idc['name']s
+    return json.dumps({"code": "0","status": "success","result":idcs})
