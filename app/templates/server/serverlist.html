@@ -472,7 +472,7 @@ $('.update').click(function(){
       $("#updateForm #id").val(result.id);
       // 机房
       var idc_select = result.idc_name;
-      console.log(idc_select);
+      console.log(typeof(idc_select));
       $("#idc_name option:contains('"+idc_select+"')").attr("selected",true);
       // 机柜
       $("#updateForm #location").val(result.location);
