@@ -75,7 +75,7 @@ def serveraddapi():
         if is_exist.is_exist_ip(postData["ip_address"], fields_server):
             server_id = is_exist.is_exist_ip(postData["ip_address"], fields_server)
             conditions = [ "%s='%s'" %  (k,v) for k,v in postData.items()]
-            db.update(server,conditions,server_id)
+            db.update('server',conditions,server_id)
             return json.dumps({"code": "0", "status": "success", "result": "Update server success!"})
         else:
             try:
