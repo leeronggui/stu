@@ -60,180 +60,180 @@
 	<h4 class="modal-title">更新</h4>
       </div>
       <div class="modal-body">
-	<form method="post" id="updateForm" class="form-horizontal">
-	    <!-- <div>
-		<input id='id' type='hidden' name='id' readonly='true' >
-	    </div> --><!-- id -->
-      <div class='form-group'>
-        <label for="id" class="col-sm-3 control-label">编号</label>
-        <div class="col-sm-7">
-            <input id="id" name="id" placeholder="" type="text" class="form-control" readonly>
-        </div>
-      </div>
-      <div class='form-group'>
-        <label for="idc_name" class="col-sm-3 control-label">机房名</label>
-        <div class="col-sm-7">
-            <select id='idc_name' class='multiselect dropdown-toggle btn btn-default'>
-            </select>
-        </div>
-      </div>
-      <div class="hr-line-dashed"></div>
-      <div class='form-group'>
-        <label for="cabinet_id" class="col-sm-3 control-label">机柜ID</label>
-        <div class="col-sm-7">
-            <select id='cabinet_id' class='multiselect dropdown-toggle btn btn-default'>
-            </select>
-        </div>
-      </div>
-      <div class="hr-line-dashed"></div>
-      <div class='form-group'>
-        <label for="location" class="col-sm-3 control-label">机柜位置</label>
-        <div class="col-sm-7">
-            <input id="location" name="location" placeholder="" type="text" class="form-control">
-        </div>
-      </div>
-      <div class="hr-line-dashed"></div>
-      <div class='form-group'>
-        <label for="ip_address" class="col-sm-3 control-label">IP地址</label>
-        <div class="col-sm-7">
-            <input id="ip_address" name="ip_address" placeholder="" type="text" class="form-control" readonly>
-        </div>
-      </div>
-      <div class="hr-line-dashed"></div>
-	    <div class='form-group'>
-    		<label for="hostname" class="col-sm-3 control-label">主机名<!-- <span class="red-fonts">*</span> --></label>
-    		<div class="col-sm-7">
-    		    <input id="hostname" name="hostname" placeholder="" type="text" class="form-control">
-    		</div>
-	    </div>
-      <div class="hr-line-dashed"></div>
-      <div class='form-group'>
-        <label for="os" class="col-sm-3 control-label">操作系统</label>
-        <div class="col-sm-7">
-            <input id="os" name="os" placeholder="" type="text" class="form-control" >
-        </div>
-      </div>
-      <div class="hr-line-dashed"></div>
-      <div class='form-group'>
-        <label for="brand" class="col-sm-3 control-label">机器品牌</label>
-        <div class="col-sm-7">
-            <input id="brand" name="brand" placeholder="" type="text" class="form-control" >
-        </div>
-      </div>
-      <div class="hr-line-dashed"></div>
-      <div class='form-group'>
-        <label for="model" class="col-sm-3 control-label">机器型号</label>
-        <div class="col-sm-7">
-            <input id="model" name="model" placeholder="" type="text" class="form-control" >
-        </div>
-      </div>
-      <div class="hr-line-dashed"></div>
-      <div class='form-group'>
-        <label for="cpu_num" class="col-sm-3 control-label">CPU数量</label>
-        <div class="col-sm-7">
-            <input id="cpu_num" name="cpu_num" placeholder="" type="text" class="form-control" >
-        </div>
-      </div>
-      <div class="hr-line-dashed"></div>
-      <div class='form-group'>
-        <label for="cpu_model" class="col-sm-3 control-label">CPU型号</label>
-        <div class="col-sm-7">
-            <input id="cpu_model" name="cpu_model" placeholder="" type="text" class="form-control" >
-        </div>
-      </div>
-      <div class="hr-line-dashed"></div>
-      <div class='form-group'>
-        <label for="memory" class="col-sm-3 control-label">内存</label>
-        <div class="col-sm-7">
-            <input id="memory" name="memory" placeholder="" type="text" class="form-control" >
-        </div>
-      </div>
-      <div class="hr-line-dashed"></div>
-      <div class='form-group'>
-        <label for="disk_info" class="col-sm-3 control-label">磁盘信息</label>
-        <div class="col-sm-7">
-            <input id="disk_info" name="disk_info" placeholder="" type="text" class="form-control" >
-        </div>
-      </div>
-      <div class="hr-line-dashed"></div>
-      <div class='form-group'>
-        <label for="total_disk" class="col-sm-3 control-label">磁盘总量</label>
-        <div class="col-sm-7">
-            <input id="total_disk" name="total_disk" placeholder="" type="text" class="form-control" >
-        </div>
-      </div>
-      <div class="hr-line-dashed"></div>
-      <div class='form-group'>
-        <label for="network_num" class="col-sm-3 control-label">网卡数量</label>
-        <div class="col-sm-7">
-            <input id="network_num" name="network_num" placeholder="" type="text" class="form-control" >
-        </div>
-      </div>
-      <div class="hr-line-dashed"></div>
-      <div class='form-group'>
-        <label for="network_model" class="col-sm-3 control-label">网卡型号</label>
-        <div class="col-sm-7">
-            <input id="network_model" name="network_model" placeholder="" type="text" class="form-control" >
-        </div>
-      </div>
-      <div class="hr-line-dashed"></div>
-      <div class='form-group'>
-        <label for="sys_kernel_version" class="col-sm-3 control-label">内核版本</label>
-        <div class="col-sm-7">
-            <input id="sys_kernel_version" name="sys_kernel_version" placeholder="" type="text" class="form-control" >
-        </div>
-      </div>
-      <div class="hr-line-dashed"></div>
-      <div class='form-group'>
-        <label for="sn_num" class="col-sm-3 control-label">SN编号</label>
-        <div class="col-sm-7">
-            <input id="sn_num" name="sn_num" placeholder="" type="text" class="form-control" >
-        </div>
-      </div>
-      <div class="hr-line-dashed"></div>
-      <div class='form-group'>
-        <label for="isVirtual" class="col-sm-3 control-label">虚拟主机</label>
-        <div class="col-sm-7">
-            <input id="isVirtual" name="isVirtual" placeholder="" type="text" class="form-control" >
-        </div>
-      </div>
-	    <!-- <div class="hr-line-dashed"></div>
-	    <div class='form-group'>
-		<label for="lan_ip" class="col-sm-3 control-label">内网IP</label>
-		<div class="col-sm-7">
-		    <input id="lan_ip" name="lan_ip" placeholder="Lan ip" type="text" class="form-control" >
-		</div>
-	    </div>
-	    <div class="hr-line-dashed"></div>
-	    <div class='form-group'>
-		<label for="wan_ip" class="col-sm-3 control-label">外网IP</label>
-		<div class="col-sm-7">
-		    <input id="wan_ip" name="wan_ip" placeholder="Wan ip" type="text" class="form-control">
-		</div>
-	    </div> -->
+      	<form method="post" id="updateForm" class="form-horizontal">
+      	    <!-- <div>
+      		    <input id='id' type='hidden' name='id' readonly='true' >
+      	    </div> --><!-- id -->
+            <div class='form-group'>
+              <label for="id" class="col-sm-3 control-label">编号</label>
+              <div class="col-sm-7">
+                  <input id="id" name="id" placeholder="" type="text" class="form-control" readonly>
+              </div>
+            </div>
+            <div class='form-group'>
+              <label for="idc_name" class="col-sm-3 control-label">机房名</label>
+              <div class="col-sm-7">
+                  <select id='idc_name' class='multiselect dropdown-toggle btn btn-default'>
+                  </select>
+              </div>
+            </div>
+            <div class="hr-line-dashed"></div>
+            <div class='form-group'>
+              <label for="cabinet_id" class="col-sm-3 control-label">机柜ID</label>
+              <div class="col-sm-7">
+                  <select id='cabinet_id' class='multiselect dropdown-toggle btn btn-default'>
+                  </select>
+              </div>
+            </div>
+            <div class="hr-line-dashed"></div>
+            <div class='form-group'>
+              <label for="location" class="col-sm-3 control-label">机柜位置</label>
+              <div class="col-sm-7">
+                  <input id="location" name="location" placeholder="" type="text" class="form-control">
+              </div>
+            </div>
+            <div class="hr-line-dashed"></div>
+            <div class='form-group'>
+              <label for="ip_address" class="col-sm-3 control-label">IP地址</label>
+              <div class="col-sm-7">
+                  <input id="ip_address" name="ip_address" placeholder="" type="text" class="form-control" readonly>
+              </div>
+            </div>
+            <div class="hr-line-dashed"></div>
+      	    <div class='form-group'>
+          		<label for="hostname" class="col-sm-3 control-label">主机名<!-- <span class="red-fonts">*</span> --></label>
+          		<div class="col-sm-7">
+          		    <input id="hostname" name="hostname" placeholder="" type="text" class="form-control">
+          		</div>
+      	    </div>
+            <div class="hr-line-dashed"></div>
+            <div class='form-group'>
+              <label for="os" class="col-sm-3 control-label">操作系统</label>
+              <div class="col-sm-7">
+                  <input id="os" name="os" placeholder="" type="text" class="form-control" >
+              </div>
+            </div>
+            <div class="hr-line-dashed"></div>
+            <div class='form-group'>
+              <label for="brand" class="col-sm-3 control-label">机器品牌</label>
+              <div class="col-sm-7">
+                  <input id="brand" name="brand" placeholder="" type="text" class="form-control" >
+              </div>
+            </div>
+            <div class="hr-line-dashed"></div>
+            <div class='form-group'>
+              <label for="model" class="col-sm-3 control-label">机器型号</label>
+              <div class="col-sm-7">
+                  <input id="model" name="model" placeholder="" type="text" class="form-control" >
+              </div>
+            </div>
+            <div class="hr-line-dashed"></div>
+            <div class='form-group'>
+              <label for="cpu_num" class="col-sm-3 control-label">CPU数量</label>
+              <div class="col-sm-7">
+                  <input id="cpu_num" name="cpu_num" placeholder="" type="text" class="form-control" >
+              </div>
+            </div>
+            <div class="hr-line-dashed"></div>
+            <div class='form-group'>
+              <label for="cpu_model" class="col-sm-3 control-label">CPU型号</label>
+              <div class="col-sm-7">
+                  <input id="cpu_model" name="cpu_model" placeholder="" type="text" class="form-control" >
+              </div>
+            </div>
+            <div class="hr-line-dashed"></div>
+            <div class='form-group'>
+              <label for="memory" class="col-sm-3 control-label">内存</label>
+              <div class="col-sm-7">
+                  <input id="memory" name="memory" placeholder="" type="text" class="form-control" >
+              </div>
+            </div>
+            <div class="hr-line-dashed"></div>
+            <div class='form-group'>
+              <label for="disk_info" class="col-sm-3 control-label">磁盘信息</label>
+              <div class="col-sm-7">
+                  <input id="disk_info" name="disk_info" placeholder="" type="text" class="form-control" >
+              </div>
+            </div>
+            <div class="hr-line-dashed"></div>
+            <div class='form-group'>
+              <label for="total_disk" class="col-sm-3 control-label">磁盘总量</label>
+              <div class="col-sm-7">
+                  <input id="total_disk" name="total_disk" placeholder="" type="text" class="form-control" >
+              </div>
+            </div>
+            <div class="hr-line-dashed"></div>
+            <div class='form-group'>
+              <label for="network_num" class="col-sm-3 control-label">网卡数量</label>
+              <div class="col-sm-7">
+                  <input id="network_num" name="network_num" placeholder="" type="text" class="form-control" >
+              </div>
+            </div>
+            <div class="hr-line-dashed"></div>
+            <div class='form-group'>
+              <label for="network_model" class="col-sm-3 control-label">网卡型号</label>
+              <div class="col-sm-7">
+                  <input id="network_model" name="network_model" placeholder="" type="text" class="form-control" >
+              </div>
+            </div>
+            <div class="hr-line-dashed"></div>
+            <div class='form-group'>
+              <label for="sys_kernel_version" class="col-sm-3 control-label">内核版本</label>
+              <div class="col-sm-7">
+                  <input id="sys_kernel_version" name="sys_kernel_version" placeholder="" type="text" class="form-control" >
+              </div>
+            </div>
+            <div class="hr-line-dashed"></div>
+            <div class='form-group'>
+              <label for="sn_num" class="col-sm-3 control-label">SN编号</label>
+              <div class="col-sm-7">
+                  <input id="sn_num" name="sn_num" placeholder="" type="text" class="form-control" >
+              </div>
+            </div>
+            <div class="hr-line-dashed"></div>
+            <div class='form-group'>
+              <label for="isVirtual" class="col-sm-3 control-label">虚拟主机</label>
+              <div class="col-sm-7">
+                  <input id="isVirtual" name="isVirtual" placeholder="" type="text" class="form-control" >
+              </div>
+            </div>
+            <!-- <div class="hr-line-dashed"></div>
+      	    <div class='form-group'>
+          		<label for="lan_ip" class="col-sm-3 control-label">内网IP</label>
+          		<div class="col-sm-7">
+          		    <input id="lan_ip" name="lan_ip" placeholder="Lan ip" type="text" class="form-control" >
+          		</div>
+      	    </div>
+      	    <div class="hr-line-dashed"></div>
+      	    <div class='form-group'>
+          		<label for="wan_ip" class="col-sm-3 control-label">外网IP</label>
+          		<div class="col-sm-7">
+          		    <input id="wan_ip" name="wan_ip" placeholder="Wan ip" type="text" class="form-control">
+          		</div>
+      	    </div> -->
 
-	    <div class="hr-line-dashed"></div>
-	    <div class='form-group'>
-    		<label for="op" class="col-sm-3 control-label">运维负责人</label>
-    		<div class="col-sm-7">
-    		    <input id="op" name="op" placeholder="Operator" type="text" class="form-control">
-    		</div>
-	    </div>
-	    <div class="hr-line-dashed"></div>
-	    <div class='form-group'>
-		    <label for="phone" class="col-sm-3 control-label">联系电话</label>
-    		<div class="col-sm-7">
-    		    <input id="phone" name="phone" placeholder="Phone" type="text" class="form-control">
-    		</div>
-	    </div>
-      <div class="hr-line-dashed"></div>
-      <div class='form-group'>
-        <label for="comments" class="col-sm-3 control-label">备注</label>
-        <div class="col-sm-7">
-            <textarea name="comments" id="comments" rows="3" class="form-control"></textarea>
-        </div>
-      </div>
-	</form>
+      	    <div class="hr-line-dashed"></div>
+      	    <div class='form-group'>
+          		<label for="op" class="col-sm-3 control-label">运维负责人</label>
+          		<div class="col-sm-7">
+          		    <input id="op" name="op" placeholder="Operator" type="text" class="form-control">
+          		</div>
+      	    </div>
+      	    <div class="hr-line-dashed"></div>
+      	    <div class='form-group'>
+      		    <label for="phone" class="col-sm-3 control-label">联系电话</label>
+          		<div class="col-sm-7">
+          		    <input id="phone" name="phone" placeholder="Phone" type="text" class="form-control">
+          		</div>
+      	    </div>
+            <div class="hr-line-dashed"></div>
+            <div class='form-group'>
+              <label for="comments" class="col-sm-3 control-label">备注</label>
+              <div class="col-sm-7">
+                  <textarea name="comments" id="comments" rows="3" class="form-control"></textarea>
+              </div>
+            </div>
+      	</form>
       </div>
       <div class="modal-footer">
 	<button type="button" class="btn btn-default update-cancel" data-dismiss="modal">取消</button>
@@ -467,7 +467,7 @@ $('.update').click(function(){
       $("#updateForm #phone").val(result.phone);
       $("#updateForm #comments").val(result.comments);
 
-      $("#updateForm .update-sure").click(function(){
+      $("#updateModel .update-sure").click(function(){
         var str = $("#updateForm").serialize();
         var strJson = $("#updateForm").serializeObject();
         console.log(1);
