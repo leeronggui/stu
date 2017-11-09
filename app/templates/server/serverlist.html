@@ -448,7 +448,7 @@ $('.detail').click(function(){
     url: "http://211.159.165.47:14320/api/v1/serverinfo/?id="+server_id,
     success: function(data){
       var result = data.result;
-      console.log(result.id);
+      console.log(1);
       $("#detailModel .detail_id").text(result.id);
       $("#detailModel .detail_idc_name").text(result.idc_name);
       $("#detailModel .detail_cabinet_id").text(result.cabinet_id);
