@@ -188,10 +188,10 @@ CREATE TABLE `server` (
   `isVirtual` boolean,
   `adminer` varchar(20) DEFAULT NULL,
   `phone` varchar(11) DEFAULT NULL,
-  `update_time` datetime DEFAULT NULL,
+  `update_time` TIMESTAMP,
   `comments` varchar(200) DEFAULT NULL,
   PRIMARY KEY (`id`),
-  UNIQUE KEY `hostname` (`hostname`),
+  UNIQUE KEY `ip_address` (`ip_address`),
   KEY `cabinet_id` (`cabinet_id`),
   CONSTRAINT `server_ibfk_1` FOREIGN KEY (`cabinet_id`) REFERENCES `cabinet` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;

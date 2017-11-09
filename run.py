@@ -3,6 +3,8 @@
 
 from app import app
 from flask_cors import CORS
+
+#允许跨域访问
 CORS(app, resources=r'/*')
 
 if __name__=='__main__':

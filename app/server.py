@@ -8,12 +8,17 @@ from utils import login_request
 from utils import json_encoder
 import json
 import db
+from utils import is_exist
+from utils import diff_keys
 
 app.config.from_object(Table)
 fields_cabinet=app.config.get('FIELDS_CABINET')  
 fields_server=app.config.get('FIELDS_SERVER')
 fields_server_show = app.config.get('FIELDS_SERVER_SHOW')
 fields_idc = app.config.get('FIELDS_IDC')
+POST_STANDARD_KEYS = ['idc_name', 'hostname', 'os', 'brand', 'model', 'cpu_num', 'cpu_model', 'memory', 'disk_info',
+                      'total_disk', 'network_num', 'network_model', 'sys_kernel_version', 'sn_num', 'ip_address',
+                      'isVirtual', 'update_time']
 
 @app.route('/server/')
 @login_request.login_request
@@ -56,8 +61,6 @@ def serveradd():
 #增加主机api接口
 @app.route("/api/v1/serveradd/",methods=['POST'])
 def serveraddapi():
-    POST_STANDARD_KEYS = ['idc_name', 'hostname', 'os', 'brand', 'model', 'cpu_num', 'cpu_model', 'memory', 'disk_info',
-                     'total_disk', 'network_num', 'network_model', 'sys_kernel_version', 'sn_num', 'ip_address', 'isVirtual', 'update_time']
     if request.method == 'POST':
         try:
             data = request.get_data()
@@ -65,22 +68,22 @@ def serveraddapi():
         except Exception as e:
             return json.dumps({"code": "1","status": "failed","result": "Data type must be json."})
         postKeys = postData.keys()
-        if list(set(postKeys) - set(POST_STANDARD_KEYS)):
-            return json.dumps({"code": "1","status": "failed","result": "Lost some key!"})
+        diff_key = diff_keys.diff_keys(postKeys,POST_STANDARD_KEYS)
+        return_str = "Unknow key: %s!" % (str(diff_key))
+        if diff_key:return json.dumps({"code": "1","status": "failed","result": return_str})
+        if not is_exist.is_exist_idc(postData["idc_name"], fields_idc): return json.dumps({"code": "1","status": "failed","result": "Idc not exist!"})
+        if is_exist.is_exist_ip(postData["ip_address"], fields_server):
+            server_id = is_exist.is_exist_ip(postData["ip_address"], fields_server)
+            conditions = [ "%s='%s'" %  (k,v) for k,v in postData.items()]
+            db.update(server,conditions,server_id)
+            return json.dumps({"code": "0", "status": "success", "result": "Update server success!"})
         else:
-            postIdcUp = postData['idc_name'].upper()
-            postIdcLow = postData['idc_name'].lower()
-            for idcInfo in db.list('idc', fields_idc):
-                if postIdcUp == idcInfo['name'] or postIdcLow in idcInfo['name']:
-                    try:
-                        conditions = [ "%s='%s'" %  (k,v) for k,v in postData.items()]
-                        db.add('server', conditions)
-                        return json.dumps({"code": "0","status": "success","result": "Add server success!"})
-                    except Exception as e:
-                        return json.dumps({"code": "1","status": "failed","result": "add db failed."})
-                else:
-                    continue
-            return json.dumps({"code": "1", "status": "failed", "result": "First add idc."})
+            try:
+                conditions = [ "%s='%s'" %  (k,v) for k,v in postData.items()]
+                db.add('server', conditions)
+                return json.dumps({"code": "0","status": "success","result": "Add server success!"})
+            except Exception as e:
+                return json.dumps({"code": "1","status": "failed","result": "add db failed."})
     if request.method == 'GET':
         return json.dumps({"code": "1","status": "failed","result": "Get method not allow."})
 
@@ -106,11 +109,18 @@ def serverinfo():
 # @login_request.login_request
 def serverupdate(id):
     if request.method == 'POST':
+        #判断是否为json串
         try:
             data = request.get_data()
             postData = json.loads(data)
         except Exception as e:
             return json.dumps({"code": "1","status": "failed","result": "Data type must be json."})
+        #检查传入keys
+        postKeys = postData.keys()
+        diff_key = diff_keys.diff_keys(postKeys, POST_STANDARD_KEYS)
+        return_str = "Unknow key: %s!" % (str(diff_key))
+        if diff_key: return json.dumps({"code": "1", "status": "failed", "result": return_str})
+        #进行更新 操作
         try:
             conditions = ["%s='%s'" % (k, v) for k, v in postData.items()]
             db.update('server', conditions, id)
