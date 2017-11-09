@@ -468,8 +468,10 @@ $('.update').click(function(){
       $("#updateForm #comments").val(result.comments);
 
       $("#updateForm .update-sure").click(function(){
-        var formStr = $("#updateForm").serializeObject();
-        console.log(formStr);
+        var str = $("#updateForm").serialize();
+        var strJson = $("#updateForm").serializeObject();
+        console.log(str);
+        console.log(strJson);
           // $.ajax({
           //   method: "POST",
           //   url: "http://211.159.165.47:14320/api/v1/serverupdate/"+server_id,
