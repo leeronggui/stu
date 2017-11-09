@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>测试数据</title>
+  <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+</head>
+<body>
+<script type="text/javascript">
+var server_id = 8;
+  $.ajax({
+    method: "GET",
+    url: "http://211.159.165.47:14320/api/v1/serverinfo/?id="+server_id,
+    success: function(data){
+      console.log(data)
+    }
+  })
+</script>
+</body>
+</html>
