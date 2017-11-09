@@ -436,6 +436,21 @@ $('#updateForm').Validform({tiptype:3})
 //     $('#updateModel').modal('show')
 // })
 // 编辑
+$.fn.serializeObject = function(){
+  var o = {};
+  var a = this.serializeArray();
+  $.each(a, function() {
+    if (o[this.name] !== undefined) {
+      if (!o[this.name].push) {
+        o[this.name] = [o[this.name]];
+      }
+      o[this.name].push(this.value || '');
+    } else {
+      o[this.name] = this.value || '';
+    }
+  });
+  return o;
+};
 $('.update').click(function(){
   $('#updateModel').modal('show');
   var server_id = $(this).attr('data-id');
