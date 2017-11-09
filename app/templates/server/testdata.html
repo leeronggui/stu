@@ -7,12 +7,24 @@
 </head>
 <body>
 <script type="text/javascript">
-var server_id = 8;
+// var server_id = 8;
+  // $.ajax({
+  //   method: "POST",
+  //   url: "http://211.159.165.47:14320/api/v1/serverupdate/"+server_id,
+  //   data: JSON.stringify({"hostname":"1","os":"2"}),
+  //   contentType: "application/json; charset=utf-8",
+  //   dataType: "json",
+  //   success: function(data){
+  //     console.log(data);
+  //   }
+  // })
   $.ajax({
     method: "GET",
-    url: "http://211.159.165.47:14320/api/v1/serverinfo/?id="+server_id,
+    url: "http://211.159.165.47:14320/api/v1/cabinet/cabinetname/5",
     success: function(data){
-      console.log(data)
+      var cabinet_data = JSON.parse(data);
+      var cabinets = cabinet_data.result;
+      console.log(cabinets)
     }
   })
 </script>
