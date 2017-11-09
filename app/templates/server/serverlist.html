@@ -436,9 +436,39 @@ $('.update').click(function(){
     $('#updateModel').modal('show')
 })
 // 编辑
-// $('.update').click(function(){
-//   $('#updateModel').modal('show');
-// })
+$('.update').click(function(){
+  $('#updateModel').modal('show');
+  var server_id = $(this).attr('data-id');
+  $.ajax({
+    method: "GET",
+    url: "http://211.159.165.47:14320/api/v1/serverinfo/?id="+server_id,
+    success: function(data){
+      var result = data.result;
+      $("#updateForm #id").val(result.id);
+      // 机房
+      // 机柜
+      $("#updateForm #location").val(result.location);
+      $("#updateForm #ip_address").val(result.ip_address);
+      $("#updateForm #hostname").val(result.hostname);
+      $("#updateForm #os").val(result.os);
+      $("#updateForm #brand").val(result.brand);
+      $("#updateForm #model").val(result.model);
+      $("#updateForm #cpu_num").val(result.cpu_num);
+      $("#updateForm #cpu_model").val(result.cpu_model);
+      $("#updateForm #memory").val(result.memory);
+      $("#updateForm #disk_info").val(result.disk_info);
+      $("#updateForm #total_disk").val(result.total_disk);
+      $("#updateForm #network_num").val(result.network_num);
+      $("#updateForm #network_model").val(result.network_model);
+      $("#updateForm #sys_kernel_version").val(result.sys_kernel_version);
+      $("#updateForm #sn_num").val(result.sn_num);
+      $("#updateForm #isVirtual").val(result.isVirtual);
+      $("#updateForm #op").val(result.adminer);
+      $("#updateForm #phone").val(result.phone);
+      $("#updateForm #comments").val(result.comments);
+    }
+  })
+})
 // 详情
 $('.detail').click(function(){
   $('#detailModel').modal('show');
