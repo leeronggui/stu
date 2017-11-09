@@ -214,9 +214,9 @@
 
       	    <div class="hr-line-dashed"></div>
       	    <div class='form-group'>
-          		<label for="op" class="col-sm-3 control-label">运维负责人</label>
+          		<label for="adminer" class="col-sm-3 control-label">运维负责人</label>
           		<div class="col-sm-7">
-          		    <input id="op" name="op" placeholder="Operator" type="text" class="form-control">
+          		    <input id="adminer" name="adminer" placeholder="Operator" type="text" class="form-control">
           		</div>
       	    </div>
       	    <div class="hr-line-dashed"></div>
@@ -478,20 +478,33 @@ $('.update').click(function(){
       $("#updateForm #sys_kernel_version").val(result.sys_kernel_version);
       $("#updateForm #sn_num").val(result.sn_num);
       $("#updateForm #isVirtual").val(result.isVirtual);
-      $("#updateForm #op").val(result.adminer);
+      $("#updateForm #adminer").val(result.adminer);
       $("#updateForm #phone").val(result.phone);
       $("#updateForm #comments").val(result.comments);
 
       $("#updateModel .update-sure").click(function(){
-          var strJson = $("#updateForm").serializeObject();
+          var strJson = JSON.stringify($("#updateForm").serializeObject());
           $.ajax({
             method: "POST",
             url: "http://211.159.165.47:14320/api/v1/serverupdate/"+server_id,
-            data: JSON.stringify(strJson),
+            data: strJson,
             success: function(data){
-              console.log(data);
+              data=JSON.parse(data)
+              if (data['code'] == 0){
+                  swal({
+                title:'Congratulation',
+                text:data['result'],
+                type:'success',
+                confirmButtonText:'确定'
+                },function(){
+                    location.href='/server/'
+                })
+              }else{
+                  swal('Error',data['errmsg'],'error')
+              }
             }
           })
+          return false
       })
     }
   })
