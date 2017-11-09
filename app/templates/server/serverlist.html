@@ -483,21 +483,15 @@ $('.update').click(function(){
       $("#updateForm #comments").val(result.comments);
 
       $("#updateModel .update-sure").click(function(){
-        var str = $("#updateForm").serialize();
-        var strJson = $("#updateForm").serializeObject();
-        console.log(1);
-        console.log(str);
-        console.log(strJson);
-          // $.ajax({
-          //   method: "POST",
-          //   url: "http://211.159.165.47:14320/api/v1/serverupdate/"+server_id,
-          //   data: JSON.stringify({"hostname":"1","os":"2"}),
-          //   contentType: "application/json; charset=utf-8",
-          //   dataType: "json",
-          //   success: function(data){
-          //     console.log(data);
-          //   }
-          // })
+          var strJson = $("#updateForm").serializeObject();
+          $.ajax({
+            method: "POST",
+            url: "http://211.159.165.47:14320/api/v1/serverupdate/"+server_id,
+            data: JSON.stringify(strJson),
+            success: function(data){
+              console.log(data);
+            }
+          })
       })
     }
   })
