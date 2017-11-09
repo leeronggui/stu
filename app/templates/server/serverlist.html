@@ -466,6 +466,21 @@ $('.update').click(function(){
       $("#updateForm #op").val(result.adminer);
       $("#updateForm #phone").val(result.phone);
       $("#updateForm #comments").val(result.comments);
+
+      $("#updateForm .update-sure").click(function(){
+        var formStr = $("#updateForm").serializeObject();
+        console.log(formStr);
+          // $.ajax({
+          //   method: "POST",
+          //   url: "http://211.159.165.47:14320/api/v1/serverupdate/"+server_id,
+          //   data: JSON.stringify({"hostname":"1","os":"2"}),
+          //   contentType: "application/json; charset=utf-8",
+          //   dataType: "json",
+          //   success: function(data){
+          //     console.log(data);
+          //   }
+          // })
+      })
     }
   })
 })
@@ -510,19 +525,19 @@ $('.update-sure').click(function(){
     var str=$('#updateForm').serialize()
     var str1='&cabinet_id='+$('#cabinet_id').val()
     $.post('/server_update/',str+str1,function(data){
-	data=JSON.parse(data)
-	if (data['code'] == 0){
-	    swal({
-		title:'Congratulation',
-		text:data['result'],
-		type:'success',
-		confirmButtonText:'确定'
-		},function(){
-		    location.href='/server/'
-		})
-	}else{
-	    swal('Error',data['errmsg'],'error')
-	}
+	   data=JSON.parse(data)
+    	if (data['code'] == 0){
+    	    swal({
+    		title:'Congratulation',
+    		text:data['result'],
+    		type:'success',
+    		confirmButtonText:'确定'
+    		},function(){
+    		    location.href='/server/'
+    		})
+    	}else{
+    	    swal('Error',data['errmsg'],'error')
+    	}
     })
     return false
 })
