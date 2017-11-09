@@ -454,6 +454,15 @@ $.fn.serializeObject = function(){
 $('.update').click(function(){
   $('#updateModel').modal('show');
   var server_id = $(this).attr('data-id');
+  var str = '';
+  $.get('http://211.159.165.47:14320/api/v1/idc/idcname',function(data){
+     var idc_data = JSON.parse(data);
+     var idcnames = idc_data.result;
+     for(var i=0;i<idcnames.length;i++){
+          str += '<option value="'+idcnames[i]['id']+'">'+idcnames[i]['name']+'</option>'
+          }
+     $('#idc_name').html(str)
+  })
   $.ajax({
     method: "GET",
     url: "http://211.159.165.47:14320/api/v1/serverinfo/?id="+server_id,
