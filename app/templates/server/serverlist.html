@@ -392,7 +392,6 @@
     </div><!-- /.modal-content -->
   </div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
-<!-- <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script> -->
 <script>
 $('#updateForm').Validform({tiptype:3})
 
@@ -453,7 +452,7 @@ $('.detail').click(function(){
       $("#detailModel .detail_idc_name").text(result.idc_name);
       $("#detailModel .detail_cabinet_id").text(result.cabinet_id);
       $("#detailModel .detail_location").text(result.location);
-      $("#detailModel .detail_detail_hostname").text(result.hostname);
+      $("#detailModel .detail_detail_hostname").text(result['hostname']);
       $("#detailModel .detail_os").text(result.os);
       $("#detailModel .detail_brand").text(result.brand);
       $("#detailModel .detail_model").text(result.model);
