@@ -489,11 +489,11 @@ $('.update').click(function(){
             url: "http://211.159.165.47:14320/api/v1/serverupdate/"+server_id,
             data: strJson,
             success: function(data){
-              data=JSON.parse(data)
-              if (data['code'] == 0){
+              var result_str=JSON.parse(data)
+              if (result_str['code'] == 0){
                   swal({
                 title:'Congratulation',
-                text:data['result'],
+                text:result_str['result'],
                 type:'success',
                 confirmButtonText:'确定'
                 },function(){
