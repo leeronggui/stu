@@ -471,9 +471,10 @@ $('.update').click(function(){
       var result = data.result;
       $("#updateForm #id").val(result.id);
       // 机房
-      var idc_select = result.idc_name;
-      console.log(typeof(idc_select));
-      $("#idc_name option:contains('"+idc_select+"')").attr("selected",true);
+      // var idc_select = result.idc_name;
+      // console.log(typeof(idc_select));
+      // $("#idc_name option:contains('"+idc_select+"')").attr("selected",true);
+      $("#idc_name").multiselect().val(result.idc_name);
       // 机柜
       $("#updateForm #location").val(result.location);
       $("#updateForm #ip_address").val(result.ip_address);
