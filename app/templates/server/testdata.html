@@ -15,10 +15,12 @@
 <select id='idc_name' class='multiselect dropdown-toggle btn btn-default'>
 </select>
 <script type="text/javascript">
-var str = "Banana";
-console.log(typeof(str));
-$("#mySelect option:contains('"+str+"')").attr("selected",true);
+var str1 = "Banana";
+console.log(typeof(str1));
+$("#mySelect option:contains('"+str1+"')").attr("selected",true);
+// $("#mySelect option[value='"+3+"']").attr('selected',true)
 // idc_name
+var str = "";
 $.get('http://211.159.165.47:14320/api/v1/idc/idcname',function(data){
   console.log(data);
      var idc_data = JSON.parse(data);
@@ -33,10 +35,12 @@ $.get('http://211.159.165.47:14320/api/v1/idc/idcname',function(data){
         url: "http://211.159.165.47:14320/api/v1/serverinfo/?id=8",
         success: function(data){
           var result = data.result;
+          console.log(result);
           // 机房
-          var idc_select = result.idc_name;
+          var idc_select = result.idc_name.toUpperCase();
           console.log(idc_select);
           $("#idc_name option:contains('"+idc_select+"')").attr("selected",true);
+          // $("#idc_name option:contains('TSN')").attr("selected",true);
         }
       })
 
