@@ -471,21 +471,21 @@ $('.update').click(function(){
     success: function(data){
       var result = data.result;
       $("#updateForm #id").val(result.id);
-      // 机房
-      var idc_select = result.idc_name.toUpperCase();
-      $("#idc_name option:contains('"+idc_select+"')").attr("selected",true);
-      // 机房对应的机柜信息
-      var cabinet_select = result.cabinet_id;
-      var idc_id = $("#idc_name option:selected").val();
-      $.get('http://211.159.165.47:14320/api/v1/cabinet/cabinetname/'+idc_id, function(data){
-          var cabinet_data = JSON.parse(data);
-          var cabinets = cabinet_data.result;
-          for(var i=0;i<cabinets.length;i++){
-                cabinet_str += '<option value="'+cabinets[i]['idc_id']+'">'+cabinets[i]['name']+'</option>'
-                }
-           $('#cabinet_id').html(cabinet_str);
-           $("#cabinet_id option:contains('"+cabinet_select+"')").attr("selected",true);
-      })
+      // // 机房
+      // var idc_select = result.idc_name.toUpperCase();
+      // $("#idc_name option:contains('"+idc_select+"')").attr("selected",true);
+      // // 机房对应的机柜信息
+      // var cabinet_select = result.cabinet_id;
+      // var idc_id = $("#idc_name option:selected").val();
+      // $.get('http://211.159.165.47:14320/api/v1/cabinet/cabinetname/'+idc_id, function(data){
+      //     var cabinet_data = JSON.parse(data);
+      //     var cabinets = cabinet_data.result;
+      //     for(var i=0;i<cabinets.length;i++){
+      //           cabinet_str += '<option value="'+cabinets[i]['idc_id']+'">'+cabinets[i]['name']+'</option>'
+      //           }
+      //      $('#cabinet_id').html(cabinet_str);
+      //      $("#cabinet_id option:contains('"+cabinet_select+"')").attr("selected",true);
+      // })
       $("#updateForm #location").val(result.location);
       $("#updateForm #ip_address").val(result.ip_address);
       $("#updateForm #hostname").val(result.hostname);
@@ -508,15 +508,15 @@ $('.update').click(function(){
 
       $("#updateModel .update-sure").click(function(){
           var str0 = $("#updateForm").serializeObject();
-          var str1={
-            "idc_name": $('#idc_name option:selected').text(),
-            "cabinet_id": $('#cabinet_id option:selected').text()
-          }
-          var strJson = $.extend({},str0,str1);
+          // var str1={
+          //   "idc_name": $('#idc_name option:selected').text(),
+          //   "cabinet_id": $('#cabinet_id option:selected').text()
+          // }
+          // var strJson = $.extend({},str0,str1);
           $.ajax({
             method: "POST",
             url: "http://211.159.165.47:14320/api/v1/serverupdate/"+server_id,
-            data: JSON.stringify(strJson),
+            data: JSON.stringify(str0),
             success: function(data){
               console.log(data);
               if (data['code'] == 0){
