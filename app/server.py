@@ -117,7 +117,7 @@ def serverupdate(id):
             return json.dumps({"code": "1","status": "failed","result": "Data type must be json."})
         #检查传入keys
         postKeys = postData.keys()
-        diff_key = diff_keys.diff_keys(postKeys, POST_STANDARD_KEYS)
+        diff_key = diff_keys.diff_keys(postKeys, fields_server)
         return_str = "Unknow key: %s!" % (str(diff_key))
         if diff_key: return json.dumps({"code": "1", "status": "failed", "result": return_str})
         #进行更新 操作
