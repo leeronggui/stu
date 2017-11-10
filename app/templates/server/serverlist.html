@@ -507,11 +507,16 @@ $('.update').click(function(){
       $("#updateForm #comments").val(result.comments);
 
       $("#updateModel .update-sure").click(function(){
-          var strJson = JSON.stringify($("#updateForm").serializeObject());
+          var str0 = $("#updateForm").serializeObject();
+          var str1={
+            "idc_name": $('#idc_name option:selected').text(),
+            "cabinet_id": $('#cabinet_id option:selected').text()
+          }
+          var strJson = $.extend({},str0,str1);
           $.ajax({
             method: "POST",
             url: "http://211.159.165.47:14320/api/v1/serverupdate/"+server_id,
-            data: strJson,
+            data: JSON.stringify(strJson),
             success: function(data){
               console.log(data);
               if (data['code'] == 0){
