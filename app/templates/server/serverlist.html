@@ -395,46 +395,46 @@
 <script>
 $('#updateForm').Validform({tiptype:3})
 
-$('.update').click(function(){
-    var id=$(this).attr('data-id')
-    var url = "/server_update_msg?id="+id
-    var str = ''
+// $('.update').click(function(){
+//     var id=$(this).attr('data-id')
+//     var url = "/server_update_msg?id="+id
+//     var str = ''
 
-    $.getJSON('/cabinet_msg',function(data){
-    	cabinets = data['result']
-    	for(var i=0;i<cabinets.length;i++){
-    	    str += '<option value="'+cabinets[i]['id']+'">'+cabinets[i]['name']+'</option>'
-    	    }
-    	$('#cabinet_id').html(str)
+//     $.getJSON('/cabinet_msg',function(data){
+//     	cabinets = data['result']
+//     	for(var i=0;i<cabinets.length;i++){
+//     	    str += '<option value="'+cabinets[i]['id']+'">'+cabinets[i]['name']+'</option>'
+//     	    }
+//     	$('#cabinet_id').html(str)
 
-    	$.getJSON(url,function(data){
-    	    if (data['code'] == 0){
-        		server = data['result']
-        		$('#id').val(server['id'])
-        		$('#hostname').val(server['hostname'])
-        		// $('#lan_ip').val(server['lan_ip'])
-        		// $('#wan_ip').val(server['wan_ip'])
-            // $("#cabinet_id").val(server['cabinet_id'])
-        		$("#cabinet_id option[value='"+server['cabinet_id']+"']").attr('selected',true)
-        		// $('#op').val(server['op'])
-        		$('#phone').val(server['phone'])
-        		$('#cabinet_id').multiselect({
-        			    placeholder: "请选择",
-        			    enableCaseInsensitiveFiltering: true
-        			    })
-        		$('#cabinet_id').multiselect('refresh')
-    	    }else{
-    		    $('#errmsg').html('fail')
-    	    }
-    	})
-    //	$('#cabinet_id').multiselect({
-    //		    placeholder: "请选择",
-    //		    enableCaseInsensitiveFiltering: true
-    //		    })
-    //	$('#cabinet_id').multiselect('refresh')
-    })
-    $('#updateModel').modal('show')
-})
+//     	$.getJSON(url,function(data){
+//     	    if (data['code'] == 0){
+//         		server = data['result']
+//         		$('#id').val(server['id'])
+//         		$('#hostname').val(server['hostname'])
+//         		$('#lan_ip').val(server['lan_ip'])
+//         		$('#wan_ip').val(server['wan_ip'])
+//             // $("#cabinet_id").val(server['cabinet_id'])
+//         		$("#cabinet_id option[value='"+server['cabinet_id']+"']").attr('selected',true)
+//         		$('#op').val(server['op'])
+//         		$('#phone').val(server['phone'])
+//         		$('#cabinet_id').multiselect({
+//         			    placeholder: "请选择",
+//         			    enableCaseInsensitiveFiltering: true
+//         			    })
+//         		$('#cabinet_id').multiselect('refresh')
+//     	    }else{
+//     		    $('#errmsg').html('fail')
+//     	    }
+//     	})
+//     //	$('#cabinet_id').multiselect({
+//     //		    placeholder: "请选择",
+//     //		    enableCaseInsensitiveFiltering: true
+//     //		    })
+//     //	$('#cabinet_id').multiselect('refresh')
+//     })
+//     $('#updateModel').modal('show')
+// })
 // 编辑
 $.fn.serializeObject = function(){
   var o = {};
@@ -451,78 +451,78 @@ $.fn.serializeObject = function(){
   });
   return o;
 };
-// $('.update').click(function(){
-//   $('#updateModel').modal('show');
-//   var server_id = $(this).attr('data-id');
-//   var str = '';
-//   $.get('http://211.159.165.47:14320/api/v1/idc/idcname',function(data){
-//      var idc_data = JSON.parse(data);
-//      var idcnames = idc_data.result;
-//      for(var i=0;i<idcnames.length;i++){
-//           str += '<option value="'+idcnames[i]['id']+'">'+idcnames[i]['name']+'</option>'
-//           }
-//      $('#idc_name').html(str)
-//   })
+$('.update').click(function(){
+  $('#updateModel').modal('show');
+  var server_id = $(this).attr('data-id');
+  var str = '';
+  $.get('http://211.159.165.47:14320/api/v1/idc/idcname',function(data){
+     var idc_data = JSON.parse(data);
+     var idcnames = idc_data.result;
+     for(var i=0;i<idcnames.length;i++){
+          str += '<option value="'+idcnames[i]['id']+'">'+idcnames[i]['name']+'</option>'
+          }
+     $('#idc_name').html(str)
+  })
 
-//   $.ajax({
-//     method: "GET",
-//     url: "http://211.159.165.47:14320/api/v1/serverinfo/?id="+server_id,
-//     success: function(data){
-//       var result = data.result;
-//       $("#updateForm #id").val(result.id);
-//       // 机房
-//       // var idc_select = result.idc_name;
-//       // console.log(typeof(idc_select));
-//       // $("#idc_name option:contains('"+idc_select+"')").attr("selected",true);
-//       $("#idc_name").multiselect().val(result.idc_name);
-//       // 机柜
-//       $("#updateForm #location").val(result.location);
-//       $("#updateForm #ip_address").val(result.ip_address);
-//       $("#updateForm #hostname").val(result.hostname);
-//       $("#updateForm #os").val(result.os);
-//       $("#updateForm #brand").val(result.brand);
-//       $("#updateForm #model").val(result.model);
-//       $("#updateForm #cpu_num").val(result.cpu_num);
-//       $("#updateForm #cpu_model").val(result.cpu_model);
-//       $("#updateForm #memory").val(result.memory);
-//       $("#updateForm #disk_info").val(result.disk_info);
-//       $("#updateForm #total_disk").val(result.total_disk);
-//       $("#updateForm #network_num").val(result.network_num);
-//       $("#updateForm #network_model").val(result.network_model);
-//       $("#updateForm #sys_kernel_version").val(result.sys_kernel_version);
-//       $("#updateForm #sn_num").val(result.sn_num);
-//       $("#updateForm #isVirtual").val(result.isVirtual);
-//       $("#updateForm #adminer").val(result.adminer);
-//       $("#updateForm #phone").val(result.phone);
-//       $("#updateForm #comments").val(result.comments);
+  $.ajax({
+    method: "GET",
+    url: "http://211.159.165.47:14320/api/v1/serverinfo/?id="+server_id,
+    success: function(data){
+      var result = data.result;
+      $("#updateForm #id").val(result.id);
+      // 机房
+      // var idc_select = result.idc_name;
+      // console.log(typeof(idc_select));
+      // $("#idc_name option:contains('"+idc_select+"')").attr("selected",true);
+      $("#idc_name option[value='"+result['idc_name']+"']").attr('selected',true)
+      // 机柜
+      $("#updateForm #location").val(result.location);
+      $("#updateForm #ip_address").val(result.ip_address);
+      $("#updateForm #hostname").val(result.hostname);
+      $("#updateForm #os").val(result.os);
+      $("#updateForm #brand").val(result.brand);
+      $("#updateForm #model").val(result.model);
+      $("#updateForm #cpu_num").val(result.cpu_num);
+      $("#updateForm #cpu_model").val(result.cpu_model);
+      $("#updateForm #memory").val(result.memory);
+      $("#updateForm #disk_info").val(result.disk_info);
+      $("#updateForm #total_disk").val(result.total_disk);
+      $("#updateForm #network_num").val(result.network_num);
+      $("#updateForm #network_model").val(result.network_model);
+      $("#updateForm #sys_kernel_version").val(result.sys_kernel_version);
+      $("#updateForm #sn_num").val(result.sn_num);
+      $("#updateForm #isVirtual").val(result.isVirtual);
+      $("#updateForm #adminer").val(result.adminer);
+      $("#updateForm #phone").val(result.phone);
+      $("#updateForm #comments").val(result.comments);
 
-//       $("#updateModel .update-sure").click(function(){
-//           var strJson = JSON.stringify($("#updateForm").serializeObject());
-//           $.ajax({
-//             method: "POST",
-//             url: "http://211.159.165.47:14320/api/v1/serverupdate/"+server_id,
-//             data: strJson,
-//             success: function(data){
-//               console.log(data);
-//               if (data['code'] == 0){
-//                   swal({
-//                     title:'Congratulation',
-//                     text:data['result'],
-//                     type:'success',
-//                     confirmButtonText:'确定'
-//                     },function(){
-//                         location.href='/server/'
-//                     })
-//               }else{
-//                   swal('Error',data['errmsg'],'error')
-//               }
-//             }
-//           })
-//           return false
-//       })
-//     }
-//   })
-// })
+      $("#updateModel .update-sure").click(function(){
+          var strJson = JSON.stringify($("#updateForm").serializeObject());
+          $.ajax({
+            method: "POST",
+            url: "http://211.159.165.47:14320/api/v1/serverupdate/"+server_id,
+            data: strJson,
+            success: function(data){
+              console.log(data);
+              if (data['code'] == 0){
+                  swal({
+                    title:'Congratulation',
+                    text:data['result'],
+                    type:'success',
+                    confirmButtonText:'确定'
+                    },function(){
+                        location.href='/server/'
+                    })
+              }else{
+                  swal('Error',data['errmsg'],'error')
+              }
+            }
+          })
+          return false
+      })
+    }
+  })
+})
 // 详情
 $('.detail').click(function(){
   $('#detailModel').modal('show');
