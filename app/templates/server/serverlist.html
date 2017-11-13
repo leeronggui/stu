@@ -638,8 +638,11 @@ $('#editable').DataTable({
         "sLast": "末页"
         }
     },
-    "order": [[ 0,"asc" ]],
-    "pagingType": "full_numbers"
+    // "order": [[ 0,"asc" ]],
+    "pagingType": "full_numbers",
+    "ordering": false,
+    "dom": '<"toolbar">frtip'
+    $("div.toolbar").html('<p style="color:red">已选好多项</p>')
 })
 </script>
 {% endblock %}
