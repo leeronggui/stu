@@ -3,7 +3,7 @@
 class MysqlConfig():
     SQL_HOST='localhost'
     SQL_USER='root'
-    SQL_PASSWD='56qq.cn'
+    SQL_PASSWD=''
     SQL_DB='reboot10'
 
 class Table():
